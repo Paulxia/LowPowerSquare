@@ -65,10 +65,10 @@
 -(id)_displayStringForRegistrationStatus:(int)arg1;
 @end
 
+// fixed: now works as SBStatusBarDataManager updates percentage
+%hook SBStatusBarDataManager
 
-%hook SBUIController
-
--(void)finishLaunching
+-(void)_updateBatteryPercentItem
 {
     %log;
     
@@ -82,7 +82,7 @@
     
     if (batLeft < 20)
     {
-        [[objc_getClass("SBStatusBarDataManager") sharedDataManager] setThermalColor:2 sunlightMode:NO];
+        [self setThermalColor:2 sunlightMode:NO];
     }
     
     %orig;
