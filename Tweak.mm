@@ -79,12 +79,9 @@
     int batLeft = (int)([dev batteryLevel]*100); 
     
     NSLog(@"battery Left: %d", batLeft);
-    
-    if (batLeft < 20)
-    {
-        [self setThermalColor:2 sunlightMode:NO];
-    }
-    
+
+    [self setThermalColor:(batLeft < 20) ? 2 : 0 sunlightMode:NO];
+
     %orig;
 }
 
